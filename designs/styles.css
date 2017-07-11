@@ -1,0 +1,58 @@
+.right-corder-container {
+    position:fixed;
+    right:20px;
+    bottom:20px;
+}
+.right-corder-container .right-corder-container-button {
+    height: 62px;
+    width: 62px;
+    border:none;
+    background-color:#0275d8;
+    border-radius: 62px;        /*Transform the square into rectangle, sync that value with the width/height*/
+    transition: all 300ms;      /*Animation to close the button (circle)*/
+    box-shadow:2px 2px 5px #011b32  ;
+    cursor:pointer;
+}
+.right-corder-container .right-corder-container-button span {
+    font-size: 72px;
+    color:white;
+    position: absolute;
+    left: 10px;
+    top: 16px;
+    line-height: 28px;
+}
+.tab-list {
+    display: none;
+}
+.tab-list.active {
+    display: block;
+}
+.login-only {
+    display: none;
+}
+.loggedin .login-only {
+    display: block;
+}
+.loggedin .not-login-only {
+    display: none;
+}
+
+.input-append .btn.dropdown-toggle {
+    float: none;
+}
+.right-align {
+    text-align: right;
+}
+.crossed {    
+    background-color: rgba(59, 195, 247, 0.18);
+    text-decoration: line-through !important;
+}
+.dragging {
+    height: initial !important;
+    width: 92% !important;
+}
+.btn.btn-shop {    
+    max-height: 28px;
+    font-weight: 300;
+    padding-top: 0.25em;
+}

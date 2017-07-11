@@ -1,9 +1,13 @@
 <html>
     <head>
+        <link href="/bootstrap.min.css" rel="stylesheet">
+        <link href="/select2.min.css" rel="stylesheet">
+        <link href="/css/font-awesome.css" rel="stylesheet">
+        <link href="/styles.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="/jquery.min.js"></script>
+        <script src="/bootstrap.min.js"></script>
+        <script src="/select2.min.js"></script>
         <style>
             .right-corder-container {
                 position:fixed;
@@ -14,10 +18,10 @@
                 height: 62px;
                 width: 62px;
                 border:none;
-                background-color:#6FB583;
+                background-color:#0275d8;
                 border-radius: 62px;        /*Transform the square into rectangle, sync that value with the width/height*/
                 transition: all 300ms;      /*Animation to close the button (circle)*/
-                box-shadow:2px 2px 5px rgb(25, 73, 15)  ;
+                box-shadow:2px 2px 5px #011b32  ;
                 cursor:pointer;
             }
             .right-corder-container .right-corder-container-button span {
@@ -28,30 +32,74 @@
                 top: 16px;
                 line-height: 28px;
             }
+            .tab-list {
+                display: none;
+            }
+            .tab-list.active {
+                display: block;
+            }
+            .login-only {
+                display: none;
+            }
+            .loggedin .login-only {
+                display: block;
+            }
+            .loggedin .not-login-only {
+                display: none;
+            }
         </style>
     </head>
-    <body>
+    <body style="padding-top: 15px; padding-bottom: 15px;">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Lists</h2>
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#">Page Title</a>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Shopping lists <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Shops</a>
+                        </li>
+                    </ul>
+                    <button class="navbar-btn btn btn-primary not-login-only" onclick="$(document.body).addClass('loggedin')"> 
+                        Login
+                    </button>
+                    <span class="navbar-text login-only">
+                        Logged in as User...
+                    </span>
+                </div>
+            </nav>
+            <div class="row tab-list active" data-list="lists">
+                <div class="col">
+                    <ul class="list-group">
+                        <a href="/list.html" class="list-group-item list-group-item-action">List1</a>
+                        <a href="/list.html" class="list-group-item list-group-item-action">List2</a>
+                        <a href="/list.html" class="list-group-item list-group-item-action">List3</a>
+                        <a href="/list.html" class="list-group-item list-group-item-action">List4</a>
+                        <a href="/list.html" class="list-group-item list-group-item-action">List5</a>
+                        <a href="/list.html" class="list-group-item list-group-item-action">List6</a>
+                    </ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
+            <div class="row tab-list" data-list="shops">
+                <div class="col">
                     <ul class="list-group">
-                        <a class="list-group-item list-group-item-action">List1</a>
-                        <a class="list-group-item list-group-item-action">List2</a>
-                        <a class="list-group-item list-group-item-action">List3</a>
-                        <a class="list-group-item list-group-item-action">List4</a>
-                        <a class="list-group-item list-group-item-action">List5</a>
-                        <a class="list-group-item list-group-item-action">List6</a>
+                        <a href="/shop.html" class="list-group-item list-group-item-action">Shop 1</a>
+                        <a href="/shop.html" class="list-group-item list-group-item-action">Shop 1</a>
+                        <a href="/shop.html" class="list-group-item list-group-item-action">Shop 3</a>
+                        <a href="/shop.html" class="list-group-item list-group-item-action">Shop 4</a>
+                        <a href="/shop.html" class="list-group-item list-group-item-action">Shop 5</a>
+                        <a href="/shop.html" class="list-group-item list-group-item-action">Shop 6</a>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="right-corder-container">
-            <button class="right-corder-container-button">
+            <button class="right-corder-container-button" onclick="location.href='/shop.html'">
                 <span class="short-text">+</span>
             </button>
         </div>

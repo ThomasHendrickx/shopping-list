@@ -1,0 +1,132 @@
+<html>
+    <head>
+        <link href="/bootstrap.min.css" rel="stylesheet">
+        <link href="/select2.min.css" rel="stylesheet">        
+        <link href="/styles.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"-->
+        <script src="/jquery.min.js"></script>
+        <script src="/bootstrap.min.js"></script>
+        <script src="/select2.min.js"></script>
+        <script src="/jquery.drag-drop.plugin.min.js"></script>
+        <style>
+            .right-corder-container {
+                position:fixed;
+                right:20px;
+                bottom:20px;
+            }
+            .right-corder-container .right-corder-container-button {
+                height: 62px;
+                width: 62px;
+                border:none;
+                background-color:#6FB583;
+                border-radius: 62px;        /*Transform the square into rectangle, sync that value with the width/height*/
+                transition: all 300ms;      /*Animation to close the button (circle)*/
+                box-shadow:2px 2px 5px rgb(25, 73, 15)  ;
+                cursor:pointer;
+            }
+            .right-corder-container .right-corder-container-button span {
+                font-size: 72px;
+                color:white;
+                position: absolute;
+                left: 10px;
+                top: 16px;
+                line-height: 28px;
+            }
+            .input-append .btn.dropdown-toggle {
+                float: none;
+            }
+            .right-align {
+                text-align: right;
+            }
+            .dragging {
+                height: initial !important;
+                width: 92% !important;
+            }
+        </style>
+    </head>
+    <body style="padding-top: 15px">
+        <div class="container-fluid" style="position: initial">
+            <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#">Page Title</a>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Shopping lists <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Shops</a>
+                        </li>
+                    </ul>
+                    <button class="navbar-btn btn btn-primary not-login-only" onclick="$(document.body).addClass('loggedin')"> 
+                        Login
+                    </button>
+                    <span class="navbar-text login-only">
+                        Logged in as User...
+                    </span>
+                </div>
+            </nav>
+            <div class="row">
+                <div class="col-8">
+                    <input type="text" id="shop" class="form-control" placeholder="Shop name">
+                </div>
+                <div class="col-4 right-align">
+                    <button class="btn btn-primary" onclick="location.href='/landing.html'">SAVE</button>
+                </div>
+            </div>
+            <div class="row">
+                <hr />
+            </div>
+            <div class="row">
+                <div class="col" style="position: initial">
+                    <ul class="list-group" id="draglist">
+                        <a class="list-group-item list-group-item-action justify-content-between">Wijn</a>
+                        <a class="list-group-item list-group-item-action justify-content-between">Sterke drank</a>
+                        <a class="list-group-item list-group-item-action justify-content-between">Snoepgoed</a>
+                        <a class="list-group-item list-group-item-action justify-content-between">Vlees</a>
+                        <a class="list-group-item list-group-item-action justify-content-between">Beleg</a>
+                        <a class="list-group-item list-group-item-action justify-content-between">Varia</a>
+                    </ul>
+                </div>
+            </div>
+        </div>         
+        <script>
+            $("#draglist > a").dragdrop({
+                container: $("#draglist"),
+                makeClone: true,
+                sourceHide: true,
+                dragClass: "dragging",
+                canDrag: function($src, event) {
+                    $srcElement = $src;
+                    srcIndex =$srcElement.index();
+                    dstIndex = srcIndex;
+                    return $src;
+                },
+                canDrop: function($dst) {
+                    if ($dst.is("a")) {
+                        dstIndex = $dst.index();
+                        if (srcIndex<dstIndex)
+                            $srcElement.insertAfter($dst);
+                        else
+                            $srcElement.insertBefore($dst);
+                    }
+                    return true;
+                },
+                didDrop: function($src, $dst) {
+                    // Must have empty function in order to NOT move anything.
+                    // Everything that needs to be done has been done in canDrop.
+
+                    // if (srcIndex!=dstIndex) {
+                    //     var value = currentOrder[srcIndex];
+                    //     currentOrder.splice(srcIndex, 1);
+                    //     currentOrder.splice(dstIndex, 0, value);
+                    //     console.info(currentOrder);
+                    // }
+                }
+            });
+        </script>
+    </body>
+</html>
