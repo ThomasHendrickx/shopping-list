@@ -235,10 +235,11 @@
         <script>
             $("#shop").select2({width: '100%', height: '100%'});
             $(".list-group-item").click(($event) => {
-                if(!document.body.classList.contains('shop-view'))
-                    return;
-                $($event.currentTarget).toggleClass('crossed');
-                console.log($event);
+                if(!document.body.classList.contains('shop-view')) {
+                    $('#exampleModal').modal();                    
+                } else {
+                    $($event.currentTarget).toggleClass('crossed');
+                }
             });
             $(".js-finish-shopping, .js-start-shopping").click(($event) => {                
                 $(document.body).toggleClass('shop-view');
