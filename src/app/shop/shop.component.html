@@ -1,0 +1,9 @@
+<div>
+
+  <app-shop-top [disable]="!loaded" [originalShopName]="shop?.name" (save)="onSave($event)"></app-shop-top>
+  
+  <hr />
+
+  <app-shop-list [orderedCategories]="orderedCategories" (orderChanged)="onOrderChanged($event)"></app-shop-list>
+
+</div>

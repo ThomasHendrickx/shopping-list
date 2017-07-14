@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <form (submit)="create($event)">
+    <div class="form-group">
+      <label for="qLabel">Label</label>
+      <input [(ngModel)]="newLabel" name="newLabel" type="text" class="from-control" id="qLabel" placeholder="Label ..." required>
+    </div>    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <div *ngFor="let q of qtypes" class="row">
+    <div class="col">{{q.$key}}</div>
+    <div class="col">{{q.label}}</div>
+  </div>
+</div>

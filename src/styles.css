@@ -1,1 +1,101 @@
-/* You can add global styles to this file, and also import other style files */
+
+.align-middle {
+    text-align: center;
+}
+.btn.btn-shop {    
+    max-height: 28px;
+    font-weight: 300;
+    padding-top: 0.25em;
+}
+.crossed {    
+    background-color: rgba(59, 195, 247, 0.18) !important;
+    text-decoration: line-through !important;
+}
+.dragging {
+    height: initial !important;
+    width: 92% !important;
+}
+.input-append .btn.dropdown-toggle {
+    float: none;
+}
+.login-only {
+    display: none;
+}
+.loggedin .login-only {
+    display: block;
+}
+.loggedin .not-login-only {
+    display: none;
+}
+.right-align {
+    text-align: right;
+}
+.right-corder-container {
+    position:fixed;
+    right:20px;
+    bottom:20px;
+}
+.right-corder-container .right-corder-container-button {
+    height: 62px;
+    width: 62px;
+    border:none;
+    background-color:#0275d8;
+    border-radius: 62px;        /*Transform the square into rectangle, sync that value with the width/height*/
+    transition: all 300ms;      /*Animation to close the button (circle)*/
+    box-shadow:2px 2px 5px #011b32  ;
+    cursor:pointer;
+}
+.right-corder-container .right-corder-container-button span {
+    font-size: 72px;
+    color:white;
+    position: absolute;
+    left: 10px;
+    top: 16px;
+    line-height: 28px;
+}
+.row-padding {
+    padding-top: 15px;                
+}
+.shop-view .shop-view-hide {
+    display: none;
+}
+.shop-view-show {
+    display: none;
+}
+.shop-view .shop-view-show {
+    display: block;
+}
+.tab-list {
+    display: none;
+}
+.tab-list.active {
+    display: block;
+}
+.fade.in {
+    opacity: 1;
+}
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity .15s linear;
+    -o-transition: opacity .15s linear;
+    transition: opacity .15s linear;
+}
+.modal.fade.in .modal-dialog {
+    -webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    -o-transform: translate(0,0);
+    transform: translate(0,0);
+}
+body {
+    background-color: black;
+}
+.modal-backdrop {
+    display: none;
+    opacity: 0.3;
+}
+.modal-open .modal-backdrop {
+    display: block;
+}
+.modal-open .modal-backdrop.fade {
+    opacity: 0.2;
+}

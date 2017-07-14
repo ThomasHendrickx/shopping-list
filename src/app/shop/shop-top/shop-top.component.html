@@ -1,0 +1,8 @@
+<div class="row">
+  <div class="col-8">
+    <input [(ngModel)]="shopName" [disabled]="disable" type="text" id="shop" class="form-control" placeholder="Shop name">
+  </div>
+  <div class="col-4 right-align">
+    <button class="btn btn-primary" (click)="saveClick()" [disabled]="disable" >SAVE</button>
+  </div>
+</div>

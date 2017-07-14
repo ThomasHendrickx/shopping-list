@@ -1,0 +1,45 @@
+<div>
+  <app-list-top-control 
+    *ngIf="!shopmodus" 
+    [shops]="availableShops" 
+    (onShopChanged)="onShopChanged($event)"
+    (onShopModusSet)="setShopModus($event)"></app-list-top-control>
+  <hr class="shop-view-hide" />
+  <div class="row">
+    <div class="col">
+      <ul class="list-group">
+        <a 
+          *ngFor="let item of items"
+          (click)="onItemClick(item.$key)"
+          [ngClass]="{'crossed': item.crossed}"
+          class="list-group-item list-group-item-action justify-content-between">
+          {{item.description}}
+          <span class="badge badge-primary">{{item.quantity}}{{getQuantityLabel(item.quantityType)}}</span>
+        </a>
+      </ul>
+    </div>
+  </div>
+  <!--<app-list-add-control *ngIf="!shopmodus"></app-list-add-control>-->
+  <app-list-bottom-control 
+    *ngIf="shopmodus"
+    (onShopModusSet)="setShopModus($event)"></app-list-bottom-control>
+  <!--<app-list-item-edit 
+    
+    [listId]="listId"></app-list-item-edit>-->
+</div>
+<div 
+    *ngIf="!shopmodus" 
+    class="right-corder-container shop-view-hide">
+  <button type="button" class="right-corder-container-button" data-toggle="modal" (click)="onShowModal()">
+    <span class="short-text">+</span>
+  </button>
+</div>
+<div class="modal fade" [config]="{ show: false }" bsModal #createModal="bs-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <app-list-item-edit 
+    *ngIf="selectedListItem"
+    [listItem]="selectedListItem"
+    (onSave)="onListItemSaved($event)"
+    (onCancel)="onHideModal()"
+    (onDelete)="onListItemDelete($event)" ></app-list-item-edit>
+</div>
+<bs-modal-backdrop></bs-modal-backdrop>

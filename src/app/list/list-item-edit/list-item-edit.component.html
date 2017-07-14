@@ -1,0 +1,47 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 *ngIf="listItem && listItem.$key" class="modal-title" id="exampleModalLabel">Item aanpassen</h3>
+        <h3 *ngIf="!listItem || !listItem.$key" class="modal-title" id="exampleModalLabel">Item toevoegen</h3>
+        <button *ngIf="listItem && listItem.$key" type="button" class="btn btn-danger" style="margin-top: -21px" aria-label="Delete" (click)="onDeleteClicked()">
+          Delete
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="name">Wat</label>
+            <input [(ngModel)]="description" name="description" type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Vul in wat...">
+            <small id="nameHelp" class="form-text text-muted">Vul hier in wat je op je lijstje wil.</small>
+          </div>
+          <div class="form-group">
+            <label for="type">Type</label>
+            <select  class="form-control" id="type" aria-describedby="typeHelp" (change)="onTypeChanged($event)">
+              <option 
+                *ngFor="let category of categories" 
+                [selected]="category.$key === listItem?.category"
+                value="{{category.$key}}">{{category.name}}</option>              
+            </select>
+            <small id="typeHelp" class="form-text text-muted">Kies wat voor type het is</small>
+          </div>
+          <div class="form-group">
+            <label for="quantity">Wat</label>
+            <div class="input-group">
+              <input [(ngModel)]="quantity" name="quantity" type="number" class="form-control" id="quantity" aria-describedby="quantityHelp" placeholder="Hoeveel">
+              <div class="input-group-btn">
+                <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{currentQuantityType?.label}}</button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li *ngFor="let type of quantityTypes"><a (click)="onQuantityTypeChanged(type.$key)" href="#" class="dropdown-item" >{{type.label}}</a></li>
+                </ul>
+              </div>
+            </div>
+            <small id="quantityHelp" class="form-text text-muted">Hoeveel</small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onCancelClicked()">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="save()" >Save changes</button>
+      </div>
+    </div>
+  </div>

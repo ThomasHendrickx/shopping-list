@@ -19,9 +19,20 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/tether/dist/css/tether.min.css",
+        "../node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
+        "../node_modules/bootstrap/dist/css/bootstrap-reboot.min.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/select2/dist/css/select2.min.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/tether/dist/js/tether.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../designs/jquery.drag-drop.plugin.min.js",
+        "../node_modules/select2/dist/js/select2.full.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
