@@ -5,6 +5,8 @@ import { ListsService } from "app/service/lists.service";
 import { ListItemService } from "app/service/list-item.service";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { QuantityTypesService } from "app/service/quantity-types.service";
+import { Instance } from "app/global.storage";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-list',
@@ -13,7 +15,7 @@ import { QuantityTypesService } from "app/service/quantity-types.service";
 })
 export class ListComponent implements OnInit {
 
-  @Input() listId: string;
+  listId: string;
   @ViewChild('createModal') public el: ModalDirective;
 
   qtTypes: IQuantityType[];
@@ -28,10 +30,12 @@ export class ListComponent implements OnInit {
     private _shopService: ShopsService,
     private _listService: ListsService,
     private _listItemService: ListItemService,
-    private _qtService: QuantityTypesService
+    private _qtService: QuantityTypesService,
+    private _route: ActivatedRoute
   ) { }
  
   ngOnInit() {
+    Instance.pushProperty("pagetitle", "Lijstje maken");
     this._shopService.getAll().subscribe((shops: IShop[]) => {
       this.availableShops = shops;
     });    
@@ -39,26 +43,49 @@ export class ListComponent implements OnInit {
       this.qtTypes = qt;
       this.sortItems();
     });
-    if(!this.listId) {
+    this._route.params.subscribe(params => {
+      const id = params['id'];
+      if(id !== 'new') {
+        this.listId = id;
+      }
+      this.setupList();
+    });
+  }
+
+  private setupList(): void {
+    if (!this.listId) {
       this.currentList = List.Empty();
       this.listId = this._listService.save(this.currentList);
-    }
-    this._listService.get(this.listId).subscribe((list: IList) => {
-      this.currentList = list;
-    });
-    if(this.currentList.items && this.currentList.items.length) {
-      this.currentList.items.forEach(($key: string) => {
-        this.getItem($key);
+      this.currentList.$key = this.listId;
+      setTimeout(() => {
+        this._listService.get(this.listId).subscribe((list: IList) => {
+          this.currentList = list;
+        });
+      }, 1000);
+    } else {
+      this._listService.get(this.listId).subscribe((list: IList) => {
+        this.currentList = list;
+        if (this.currentList.items && this.currentList.items.length) {
+          this.currentList.items.forEach(($key: string) => {
+            this.getItem($key);
+          });
+        }
       });
     }
   }
 
+
   onShopChanged($key: string) {
-    this.currentList.shop = $key;
+    if(this.currentList) {
+      this.currentList.shop = $key;
+      this._listService.save(this.currentList);
+    }
+    
   }
 
   setShopModus(shopmodus: boolean) {
     this.shopmodus = shopmodus;
+    Instance.pushProperty("shopmodus", shopmodus);
   }
 
   onListItemSaved(listItem: IListItem) {
@@ -72,6 +99,7 @@ export class ListComponent implements OnInit {
       this.currentList.items.push($key);
       this.getItem($key);
     }    
+    this._listService.save(this.currentList);
   }
 
   onListItemDelete(listItemKey: string) {
@@ -79,6 +107,7 @@ export class ListComponent implements OnInit {
     this.currentList.items.splice(this.currentList.items.indexOf(listItemKey), 1);
     this.items = this.items.filter((item: IListItem) => item.$key !== listItemKey);
     this.onHideModal();
+    this._listService.save(this.currentList);
   }
 
   getQuantityLabel($key: string) {
@@ -109,8 +138,6 @@ export class ListComponent implements OnInit {
     }
   }
 
-
-
   private getItem($key: string) {
     this._listItemService.get($key).subscribe((item: IListItem) => {
       const index = this.items.map((i: IListItem) => i.$key).indexOf(item.$key);
@@ -124,6 +151,9 @@ export class ListComponent implements OnInit {
   }
 
   private sortItems() {
+    if(!this.currentList) {
+      return;
+    }
     const currentShop = this.availableShops.find((shop: IShop) => shop.$key === this.currentList.shop);
     if(!currentShop || !this.items || !this.items.length) {
       return;

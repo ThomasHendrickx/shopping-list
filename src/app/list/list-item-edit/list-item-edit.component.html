@@ -31,7 +31,9 @@
               <div class="input-group-btn">
                 <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{currentQuantityType?.label}}</button>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li *ngFor="let type of quantityTypes"><a (click)="onQuantityTypeChanged(type.$key)" href="#" class="dropdown-item" >{{type.label}}</a></li>
+                  <li *ngFor="let type of quantityTypes">
+                    <a (click)="onQuantityTypeChanged(type.$key)" href="javascript:void(0)" class="dropdown-item" >{{type.label}}</a>
+                  </li>
                 </ul>
               </div>
             </div>

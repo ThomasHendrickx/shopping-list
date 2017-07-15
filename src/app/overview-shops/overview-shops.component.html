@@ -1,0 +1,16 @@
+<hr />
+<div class="row tab-list active" data-list="shops">
+  <div class="col">
+    <ul class="list-group">
+      <a 
+        *ngFor="let shop of shops"
+        routerLink="/shop/{{shop.$key}}"
+        class="list-group-item list-group-item-action">{{shop.name}}</a>
+    </ul>
+  </div>
+</div>
+<div class="right-corder-container">
+    <button class="right-corder-container-button" routerLink="/shop/new">
+        <span class="short-text">+</span>
+    </button>
+</div>

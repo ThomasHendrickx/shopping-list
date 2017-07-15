@@ -1,0 +1,21 @@
+<hr />
+<div class="row tab-list active" data-list="lists">
+  <div class="col">
+    <ul class="list-group">
+      <a 
+        *ngFor="let list of lists"
+        [ngClass]="{'crossed': list.done}"
+        routerLink="/list/{{list.$key}}"
+        class="list-group-item list-group-item-action">
+        <div class="col-8">{{getShopName(list.shop)}}</div>
+        <div class="col-4 right-align">{{list.created | date:'dd/MM'}}</div>
+        
+      </a>
+    </ul>
+  </div>
+</div>
+<div class="right-corder-container">
+    <button class="right-corder-container-button" routerLink="/list/new">
+        <span class="short-text">+</span>
+    </button>
+</div>

@@ -6,7 +6,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { DragulaModule } from 'ng2-dragula';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { TopNavComponent } from './nav/top-nav/top-nav/top-nav.component';
@@ -28,6 +28,10 @@ import { QuantityTypesComponent } from './admin/quantity-types/quantity-types.co
 import { ShopComponent } from './shop/shop.component';
 import { ShopTopComponent } from './shop/shop-top/shop-top.component';
 import { ShopListComponent } from './shop/shop-list/shop-list.component';
+import { OverviewListsComponent } from './overview-lists/overview-lists.component';
+import { OverviewShopsComponent } from './overview-shops/overview-shops.component';
+
+import { appRoutes } from 'app/routes';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,9 @@ import { ShopListComponent } from './shop/shop-list/shop-list.component';
     QuantityTypesComponent,
     ShopComponent,
     ShopTopComponent,
-    ShopListComponent
+    ShopListComponent,
+    OverviewListsComponent,
+    OverviewShopsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,8 @@ import { ShopListComponent } from './shop/shop-list/shop-list.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     DragulaModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     ListsService,

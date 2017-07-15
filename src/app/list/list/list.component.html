@@ -4,10 +4,10 @@
     [shops]="availableShops" 
     (onShopChanged)="onShopChanged($event)"
     (onShopModusSet)="setShopModus($event)"></app-list-top-control>
-  <hr class="shop-view-hide" />
+  <hr *ngIf="!shopmodus"  class="shop-view-hide" />
   <div class="row">
     <div class="col">
-      <ul class="list-group">
+      <ul *ngIf="items.length" class="list-group">
         <a 
           *ngFor="let item of items"
           (click)="onItemClick(item.$key)"
@@ -17,15 +17,14 @@
           <span class="badge badge-primary">{{item.quantity}}{{getQuantityLabel(item.quantityType)}}</span>
         </a>
       </ul>
+      <ul *ngIf="!items.length">
+        <a>Nog niets toegevoegd</a>
+      </ul>
     </div>
   </div>
-  <!--<app-list-add-control *ngIf="!shopmodus"></app-list-add-control>-->
   <app-list-bottom-control 
     *ngIf="shopmodus"
     (onShopModusSet)="setShopModus($event)"></app-list-bottom-control>
-  <!--<app-list-item-edit 
-    
-    [listId]="listId"></app-list-item-edit>-->
 </div>
 <div 
     *ngIf="!shopmodus" 

@@ -14,6 +14,9 @@ export class ShopListComponent implements OnChanges, OnInit {
   @Input() orderedCategories: ICategory[];
   @Output() orderChanged: EventEmitter<any> = new EventEmitter;
 
+  bag: any;
+  one: any;
+
   constructor(
     private _dragula: DragulaService
   ) { }

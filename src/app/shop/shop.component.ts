@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IShop, ICategory, IOrderedCategory, Shop } from "app/models";
 import { ShopsService } from "app/service/shops.service";
 import { CategoriesService } from "app/service/categories.service";
+import { Instance } from "app/global.storage";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-shop',
@@ -10,7 +12,7 @@ import { CategoriesService } from "app/service/categories.service";
 })
 export class ShopComponent implements OnInit {
 
-  @Input() shopId: string = "-KorOdiVn0hovZIiesF_";
+  shopId: string = "-KorOdiVn0hovZIiesF_";
   shop: IShop;
   orderedCategories: ICategory[];
   loaded: boolean;
@@ -20,14 +22,26 @@ export class ShopComponent implements OnInit {
 
   constructor(
     private _shopService: ShopsService,
-    private _categoryService: CategoriesService
+    private _categoryService: CategoriesService,
+    private _route: ActivatedRoute
   ) { }
 
   ngOnInit() {    
+    Instance.pushProperty("pagetitle", "Winkel aanpassen");
     this._categoryService.getAll().subscribe((categories: ICategory[]) => {
       this.allCategories = categories;
       this.updateOrderedCategories();
     });
+    this._route.params.subscribe(params => {
+      const id = params['id'];
+      if(id !== 'new') {
+        this.shopId = id;
+      }
+      this.setupShop();
+    });
+  }
+
+  private setupShop() {
     if(this.shopId) {
       this._shopService.get(this.shopId).subscribe((shop: IShop) => {
         this.shop = shop;
