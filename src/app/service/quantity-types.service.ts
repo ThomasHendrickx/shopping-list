@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { FirebaseListObservable, AngularFireDatabase, FirebaseObjectObservable } from "angularfire2/database";
+import { AfoObjectObservable, AfoListObservable, AngularFireOfflineDatabase } from 'angularfire2-offline/database';
 import { Observable } from "rxjs/Observable";
 import { IQuantityType } from "app/models";
 
 @Injectable()
 export class QuantityTypesService {
 
-  private quantitytypes: FirebaseListObservable<IQuantityType[]>;
+  private quantitytypes: AfoListObservable<IQuantityType[]>;
 
-  constructor(private _db: AngularFireDatabase) {
+  constructor(private _db: AngularFireOfflineDatabase) {
     this.quantitytypes = _db.list('/quantitytypes');
   }
 
@@ -37,7 +37,7 @@ export class QuantityTypesService {
     quantitytypeObs.update(quantitytype);
   }
 
-  private getAsFirebaseObservable(id: string): FirebaseObjectObservable<IQuantityType> {
+  private getAsFirebaseObservable(id: string): AfoObjectObservable<IQuantityType> {
     const url = this.getUrlForQuantityTypeId(id);
     return this._db.object(url);
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FirebaseObjectObservable, AngularFireDatabase, FirebaseListObservable } from "angularfire2/database";
+import { AfoObjectObservable, AfoListObservable, AngularFireOfflineDatabase } from 'angularfire2-offline/database';
 import { ICategory } from "app/models";
 import { Observable } from "rxjs/Observable";
 import { Query } from "app/models/query.model";
@@ -7,9 +7,9 @@ import { Query } from "app/models/query.model";
 @Injectable()
 export class CategoriesService {
 
-  private categories: FirebaseListObservable<ICategory[]>;
+  private categories: AfoListObservable<ICategory[]>;
 
-  constructor(private _db: AngularFireDatabase) {
+  constructor(private _db: AngularFireOfflineDatabase) {
     this.categories = _db.list('/categories');
   }
 
@@ -42,7 +42,7 @@ export class CategoriesService {
     categoryObs.update(category);
   }
 
-  private getAsFirebaseObservable(id: string): FirebaseObjectObservable<ICategory> {
+  private getAsFirebaseObservable(id: string): AfoObjectObservable<ICategory> {
     const url = this.getUrlForShopId(id);
     return this._db.object(url);
   }

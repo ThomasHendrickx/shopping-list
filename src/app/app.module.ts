@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Select2Module } from 'ng2-select2';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireOfflineModule } from 'angularfire2-offline';
 import { DragulaModule } from 'ng2-dragula';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { RouterModule } from '@angular/router';
@@ -32,6 +33,7 @@ import { OverviewListsComponent } from './overview-lists/overview-lists.componen
 import { OverviewShopsComponent } from './overview-shops/overview-shops.component';
 
 import { appRoutes } from 'app/routes';
+import { AuthService } from "app/service/auth.service";
 
 @NgModule({
   declarations: [
@@ -57,6 +59,7 @@ import { appRoutes } from 'app/routes';
     Select2Module,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireOfflineModule,
     DragulaModule,
     ModalModule.forRoot(),
     RouterModule.forRoot(appRoutes)
@@ -66,7 +69,8 @@ import { appRoutes } from 'app/routes';
     ShopsService,
     ListItemService,
     CategoriesService,
-    QuantityTypesService
+    QuantityTypesService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

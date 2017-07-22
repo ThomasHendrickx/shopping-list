@@ -151,7 +151,7 @@ export class ListComponent implements OnInit {
   }
 
   private sortItems() {
-    if(!this.currentList) {
+    if(!this.currentList || !this.availableShops) {
       return;
     }
     const currentShop = this.availableShops.find((shop: IShop) => shop.$key === this.currentList.shop);

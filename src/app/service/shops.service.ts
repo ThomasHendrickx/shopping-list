@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { Utils } from "app/utils";
 import { IShop } from "app/models/shop.model";
 import { ICategory } from "app/models";
-import { FirebaseListObservable, AngularFireDatabase, FirebaseObjectObservable } from "angularfire2/database";
+import { AfoObjectObservable, AfoListObservable, AngularFireOfflineDatabase } from 'angularfire2-offline/database';
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class ShopsService {
   
-  private shops: FirebaseListObservable<IShop[]>;
+  private shops: AfoListObservable<IShop[]>;
 
-  constructor(private _db: AngularFireDatabase) {
+  constructor(private _db: AngularFireOfflineDatabase) {
     this.shops = _db.list('/shops');
   }
 
@@ -39,7 +39,7 @@ export class ShopsService {
     shopObs.update(shop);
   }
 
-  private getAsFirebaseObservable(id: string): FirebaseObjectObservable<IShop> {
+  private getAsFirebaseObservable(id: string): AfoObjectObservable<IShop> {
     const url = this.getUrlForShopId(id);
     return this._db.object(url);
   }

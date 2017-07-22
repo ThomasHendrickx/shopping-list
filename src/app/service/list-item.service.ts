@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { IListItem } from "app/models";
 import { Utils } from "app/utils";
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AfoObjectObservable, AfoListObservable, AngularFireOfflineDatabase } from 'angularfire2-offline/database';
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class ListItemService {
 
-  private listItems: FirebaseListObservable<IListItem[]>;
+  private listItems: AfoListObservable<IListItem[]>;
 
-  constructor(private _db: AngularFireDatabase) {
+  constructor(private _db: AngularFireOfflineDatabase) {
     this.listItems = _db.list('/list-items');
   }
 
@@ -38,7 +38,7 @@ export class ListItemService {
     listItemObs.update(listItem);
   }
 
-  private getAsFirebaseObservable(id: string): FirebaseObjectObservable<IListItem> {
+  private getAsFirebaseObservable(id: string): AfoObjectObservable<IListItem> {
     const url = this.getUrlForListItemId(id);
     return this._db.object(url);
   }
