@@ -1,20 +1,31 @@
 <html>
     <head>
         <link href="/bootstrap.min.css" rel="stylesheet">
-        <link href="/select2.min.css" rel="stylesheet">        
+        <link href="/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/select2.min.css" rel="stylesheet">
         <link href="/styles.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="/jquery.min.js"></script>
         <script src="/bootstrap.min.js"></script>
         <script src="/select2.min.js"></script>
+      <style>
+        .hidden {
+          display: none;
+        }
+      </style>
     </head>
     <body style="padding-top: 15px; padding-bottom: 15px;">
         <div class="container-fluid">
             <nav class="navbar navbar-toggleable-md navbar-light bg-faded shop-view-hide">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="#">Page Title</a>
+                <a class="navbar-brand nav-title" href="#">Page Title</a>
+                <div class="navbar-avatar-container avatar-container">
+                  <div class="avatar cat-pic">
+                    <!--<i class="fa fa-question" aria-hidden="true"></i>-->
+                  </div>
+                </div>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
@@ -24,7 +35,7 @@
                             <a class="nav-link" href="#">Shops</a>
                         </li>
                     </ul>
-                    <button class="navbar-btn btn btn-primary not-login-only" onclick="$(document.body).addClass('loggedin')"> 
+                    <button class="navbar-btn btn btn-primary not-login-only" onclick="$(document.body).addClass('loggedin')">
                         Login
                     </button>
                     <span class="navbar-text login-only">
@@ -34,17 +45,28 @@
             </nav>
             <div class="row shop-view-hide" style="margin-top: 15px">
                 <div class="col-8">
-                    <select id="shop" class="form-group">
-                        <option value="colruyt-aarschot">Colruyt Aarschot</option>
-                        <option value="colruyt-aarschot">Colruyt Averbode</option>
-                    </select>
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs js-nav-tabs">
+                    <li class="nav-item"><a class="nav-link active" href="#items">Items</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#detail">Detail</a></li>
+                  </ul>
+                  <script>
+                    $(".js-nav-tabs a").click(function(event){
+                      event.preventDefault();
+                      $(event.target.closest('ul')).find('a').removeClass('active');
+                      var link = $(event.target.closest('a')).addClass('active').attr('href').replace('#','');
+                      console.log(link);
+                      $('.js-tabviews').addClass('hidden');
+                      $("#" + link).removeClass('hidden');
+                    });
+                  </script>
                 </div>
                 <div class="col-4 right-align">
                     <button class="btn btn-primary btn-shop js-start-shopping">SHOP</button>
                 </div>
             </div>
-            <hr class="shop-view-hide" />
-            <div class="row">
+            <hr class="shop-view-hide" style="border: none;" />
+            <div class="row js-tabviews" id="items">
                 <div class="col">
                     <ul class="list-group">
                         <a class="list-group-item list-group-item-action justify-content-between crossed">Pasta with a very very very very very very very very very very very very very very long name<span class="badge badge-primary">5</span></a>
@@ -68,6 +90,28 @@
                     </ul>
                 </div>
             </div>
+            <div class="row js-tabviews hidden" id="detail">
+              <div class="col">
+                <form>
+                  <div class="form-group">
+                    <label for="list-name">Name of list</label>
+                    <input type="text" class="form-control" id="list-name" placeholder="Lijst naam" required>
+                    <small id="list-name-help" class="form-text text-muted">If not filled in, name will be the name of the shop.</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="shop">Email address</label>
+                    <select id="shop" class="form-group" required>
+                      <option value="colruyt-aarschot">Colruyt Aarschot</option>
+                      <option value="colruyt-aarschot">Colruyt Averbode</option>
+                    </select>
+                    <small id="shopHelp" class="form-text text-muted">Choose the shop.</small>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-danger">Delete</button>
+                  </div>
+                </form>
+              </div>
+            </div>
         </div>
         <div class="right-corder-container shop-view-hide">
             <button type="button" class="right-corder-container-button" data-toggle="modal" data-target="#exampleModal">
@@ -77,13 +121,13 @@
         <div class="row row-padding shop-view-show">
             <div class="col align-middle">
                 <button class="btn btn-warning js-finish-shopping">Gedaan</button>
-            </div>            
+            </div>
         </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h3 class="modal-title" id="exampleModalLabel">Modal title</h3>
                     <button type="button" class="close" style="margin-top: -21px" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -169,8 +213,8 @@
                                         <li><a href="#" class="dropdown-item">g</a></li>
                                         <li><a href="#" class="dropdown-item">kg</a></li>
                                         <li><a href="#" class="dropdown-item">l</a></li>
-                                    </ul>    
-                                </div>                               
+                                    </ul>
+                                </div>
                             </div>
                             <small id="quantityHelp" class="form-text text-muted">Hoeveel</small>
                         </div>
@@ -187,14 +231,14 @@
             $("#shop").select2({width: '100%', height: '100%'});
             $(".list-group-item").click(($event) => {
                 if(!document.body.classList.contains('shop-view')) {
-                    $('#exampleModal').modal(); 
+                    $('#exampleModal').modal();
                 } else {
                     $($event.currentTarget).toggleClass('crossed');
                 }
             });
-            $(".js-finish-shopping, .js-start-shopping").click(($event) => {                
+            $(".js-finish-shopping, .js-start-shopping").click(($event) => {
                 $(document.body).toggleClass('shop-view');
             })
-        </script>            
+        </script>
     </body>
 </html>

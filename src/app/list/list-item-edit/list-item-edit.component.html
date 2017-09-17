@@ -11,7 +11,7 @@
         <form>
           <div class="form-group">
             <label for="name">Wat</label>
-            <input [(ngModel)]="description" name="description" type="text" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Vul in wat...">
+            <input [(ngModel)]="description" #descriptionEl name="description" type="text" class="form-control" id="description" aria-describedby="nameHelp" placeholder="Vul in wat...">
             <small id="nameHelp" class="form-text text-muted">Vul hier in wat je op je lijstje wil.</small>
           </div>
           <div class="form-group">

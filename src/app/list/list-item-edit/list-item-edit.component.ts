@@ -13,6 +13,7 @@ import 'rxjs/add/operator/toPromise';
 })
 export class ListItemEditComponent implements OnChanges {
 
+  @ViewChild("descriptionEl") descriptionElement;
   @Input() listItem: IListItem;
   @Output() onSave: EventEmitter<IListItem> = new EventEmitter;
   @Output() onCancel: EventEmitter<void> = new EventEmitter<void>();
@@ -26,7 +27,8 @@ export class ListItemEditComponent implements OnChanges {
 
   constructor(
     private _categoryService: CategoriesService,
-    private _quantityTypesServuce: QuantityTypesService
+    private _quantityTypesServuce: QuantityTypesService,
+    private _element: ElementRef
   ) { }
 
   ngOnInit() {
@@ -53,6 +55,7 @@ export class ListItemEditComponent implements OnChanges {
     }
     this.quantity = this.listItem.quantity;
     this.description = this.listItem.description;
+    this.descriptionElement.nativeElement.focus();
   }
 
   onTypeChanged($event): void {

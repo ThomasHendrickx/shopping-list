@@ -2,12 +2,12 @@
 .align-middle {
     text-align: center;
 }
-.btn.btn-shop {    
+.btn.btn-shop {
     max-height: 28px;
     font-weight: 300;
     padding-top: 0.25em;
 }
-.crossed {    
+.crossed {
     background-color: rgba(59, 195, 247, 0.18);
     text-decoration: line-through !important;
 }
@@ -54,7 +54,7 @@
     line-height: 28px;
 }
 .row-padding {
-    padding-top: 15px;                
+    padding-top: 15px;
 }
 .shop-view .shop-view-hide {
     display: none;
@@ -70,4 +70,35 @@
 }
 .tab-list.active {
     display: block;
+}
+.nav-title {
+  position: relative;
+  left: 65px;
+}
+.avatar {
+  background: #ccc;
+  width: 38px;
+  height: 38px;
+  border-radius: 19px;
+  text-align: center;
+  border: 1px solid;
+  cursor: pointer;
+}
+.avatar:hover {
+  border-color: #1b6d85;
+  color: #1b6d85;
+}
+.avatar-container {
+  position: absolute;
+  right: 20px;
+}
+.avatar .fa {
+  font-size: 32px;
+  padding-top: 3px;
+}
+.cat-pic {
+  background: url(http://thecatapi.com/api/images/get?format=src&size=small&type=jpg) center;
+  background-size: contain;
+  -webkit-filter: grayscale(50%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(50%);
 }
